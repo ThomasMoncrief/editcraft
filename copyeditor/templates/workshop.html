@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="page-content">
+    <div class="page-title">  
+        <h1>Workshop</h1>
+    </div>
+    <div class="article-list-view">
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>Time Submitted</th>
+                <th>Download</th>
+            </thead>
+        {% for article in articles %}
+            <tr class="table-row">
+                <td class="table-light" style="padding-right:100px;">
+                    <div id="{{article.id}}"class="workshop-article">
+                        <span class="workshop-article-title"><a href="/workshop/{{article.id}}">{{article.title}}</a><img src="static\images\edit_icon.png" id="edit-icon" class="icon"></span>
+                        <span class="title-edit-form" style="display:none;"><input class="form title-edit-input" type="text" name="title-edit-input"><img src="static\images\check_icon.png" id="check-icon" class="icon"></span>
+                    </div>
+                </td>
+                
+                   
+                <td class="table-light" style="padding-right:50px;">{{article.submit_time}}</td>
+                <td style="justify-content: space-between;">
+                    <span id="{{article.id}}" class="icon-wrapper" onclick="window.location.href='/workshop/{{article.id}}/download?type=txt';"><img src="static\images\text_icon.png" id="{{article.id}}" class="icon"></span>
+                    <span id="{{article.id}}" class="icon-wrapper" onclick="window.location.href='/workshop/{{article.id}}/download?type=docx';"><img src="static\images\word_icon.png" id="{{article.id}}" class="icon"></span>
+                </td>
+                <td>
+                    <span id="{{article.id}}" class="trash-wrapper"><img src="static\images\trash_icon.png" id="{{article.id}}" class="icon" style="margin-left:1vw;"></span>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static '/js/workshop.js' %}"></script>
+{% endblock %}

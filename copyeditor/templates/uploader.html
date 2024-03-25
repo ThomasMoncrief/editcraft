@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="page-content">
+    <div class="page-title">
+        <h1>Uploader</h1>
+    </div>
+    <form id="upload-form" style="margin-top:100px;" action="{% url 'uploader' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <h3>Upload a Word document (.docx)</h3>
+            <input id="upload-file" class="form-control" type="file" name="upload_file">
+        </div>
+        <div style="padding: 20px 0px 70px">
+            <button class="btn btn-dark" type="submit" name="action" value="upload_file">Submit file</button>    
+            <div id="blank-upload-alert" class="alert alert-info" role="alert">
+                No file detected.
+            </div>
+        </div>
+
+        <h3>Or paste your text below</h3>
+        <div style="padding-bottom:20px;" class="form-group">
+            <textarea id="upload-text" class="form-control" name="text_box" rows="5"></textarea>
+        </div>
+        <div>
+            <button class="btn btn-dark" type="submit" name="upload" value="upload_text">Submit text</button>    
+            <div id="blank-text-alert" class="alert alert-info" role="alert">
+                No text detected.
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/uploader.js"></script>
+{% endblock %}

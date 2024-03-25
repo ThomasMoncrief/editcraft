@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="page-content">
+    <div class="page-title">
+        <h1>CopyeditorGPT TURBO 3000</h1>
+    </div>
+    <div style="text-align:center; padding-bottom:50px;">
+        <img src="/static/images/robot_working.png" style="width:50%;height:50%;">
+    </div>
+    <a href="/uploader"><h2 class="about-header">Uploader</h2></a>
+    <p>Get started by uploading a document.</p>
+    <a href="/workshop"><h2 class="about-header">Workshop</h2></a>
+    <p>Review changes in the workshop.</p>
+    <a href="/about"><h2 class="about-header">About</h2></a>
+    <p>More info here!</p>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

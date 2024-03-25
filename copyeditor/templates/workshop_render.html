@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Copy Editor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/home_thumbnail.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="workshop-panel">
+
+
+        <div class="exit-buttons">
+            <span id="reject-remaining-wrapper" class="icon-wrapper" style="margin-right:1vw;" data-tooltip="reject remaining changes!">
+                <img id="reject-remaining-icon" class="icon" src="/static/images/reject_remaining_icon.png">
+            </span>
+            <span id="accept-remaining-wrapper" class="icon-wrapper" style="margin-right:1vw;"><img id="accept-remaining-icon" class="icon" src="/static/images/accept_remaining_icon.png"></span>
+            <span id="review-wrapper" class="icon-wrapper" style="margin-right:1vw;"><img id="review-icon" class="icon" src="/static/images/review_icon.png"></span>
+            <span id="save-wrapper" class="icon-wrapper" style="margin-right:1vw;"><img id="save-icon" class="icon" src="/static/images/save_icon.png"></span>
+            <span id="exit-wrapper" class="icon-wrapper" onclick="window.location.href='/workshop'"><img id="exit-icon" class="icon" src="/static/images/x_empty.png"></span>
+        </div>
+        <div style="display:inline">
+            <div class="workshop-accept-buttons">
+                <button id="reject-button" class="btn btn-danger" style="margin-right:50px;">Reject Selected Change ⛔</button>
+                <button id="accept-button" class="btn btn-success">Accept Selected Change ✓</button>
+            </div>
+            <div class="jump-buttons" style="text-align:right; padding-right:50px;">
+                <p>next change -></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content" style="margin-top:100px;">
+        <div class="page-title" article-id="{{article_id}}">  
+            <h1>Workshop</h1>
+        </div>
+
+        <div class="article">
+            <p>{{text | safe}}</p>
+        </div>
+    </div>
+    <script src="/static/js/workshop_render.js"></script>
+</body>
+
+
+    

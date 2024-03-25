@@ -1,0 +1,176 @@
+* {
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+nav {
+    padding-top:10px;
+    height:50px;
+    background-color:rgb(241, 241, 241);
+    margin-inline:10%;
+    justify-content:space-between;
+    display:flex;
+    margin-bottom:25px;
+}
+ul {
+    list-style-type:none;
+    li {
+        padding:0px 20px 0px;
+        display:inline;
+    }
+  }
+
+body {
+    background-color:rgb(241, 241, 241) !important;
+}
+
+.page-title {
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.page-content{
+    background-color:rgb(241, 241, 241);
+    margin-inline:10%;
+    margin-bottom:50px;
+}
+
+/* Login */
+.form-group {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+/* also used in settings */
+.alert-info {
+    display:none;
+    margin-top:20px;
+}
+
+p {
+    font-size:20px;
+}
+
+.inline-content {
+    display:inline;
+    vertical-align:middle; /* Optional:Align vertically if needed */
+}
+
+/* About */
+.about-header {
+    padding-top:50px;
+}
+
+/* Workshop */
+.article-list-view {
+    margin-inline:10%;
+}
+
+tr {
+    font-size:20px;
+    width:100%;
+}
+tr:hover {
+    background:rgb(221, 221, 221);
+    #edit-icon {
+        visibility: visible;
+    }
+}
+.icon {
+    height: 30px;
+    cursor:pointer;
+}
+#edit-icon {
+    visibility: hidden;
+    height: 25px;
+    padding-left:2vw;
+}
+.title-edit-input {
+    margin-right:2vw;
+    height:25px;
+    width:450px;
+}
+
+/* Workshop Page Render */
+.jump-buttons {
+    cursor: pointer;
+}
+
+.exit-buttons {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#reject-remaining-wrapper:hover {
+    filter:hue-rotate(120deg);
+}
+
+#accept-remaining-wrapper:hover {
+    filter:hue-rotate(-90deg);
+}
+
+#review-wrapper:hover {
+    filter:hue-rotate(60deg);
+}
+
+#save-wrapper:hover {
+    filter:hue-rotate(30deg);
+}
+
+#exit-wrapper:hover {
+    filter:brightness(0);
+}
+
+.article {
+    padding-top:20px;
+    margin-inline:10%;
+}
+
+.workshop-panel{
+    position:fixed;
+    top:0px;
+    width:100%;
+    height:100px;
+    background:rgb(200, 200, 200);
+    border-bottom-style: solid;
+    border-color:black;
+    border-width:2px;
+}
+.workshop-accept-buttons {
+    margin-top:25px;
+    text-align:center;
+}
+
+ins {
+    background:rgb(150, 255, 150);
+}
+ins:hover {
+    background:rgb(50, 255, 50);
+    cursor:pointer;
+}
+del {
+    background:rgb(255, 150, 150);
+}
+del:hover {
+    background:rgb(255, 50, 50);
+    cursor:pointer;
+}
+
+.del-selected {
+    background:rgb(255, 50, 50);
+}
+
+.ins-selected {
+    background:rgb(50, 255, 50);
+}
+
+/* Settings */
+.api-key-display {
+    display:flex;
+    justify-content:space-between;   
+}
+
+.api-key-form {
+    display:none;
+}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="page-content">
+    <div class="page-title" article-id="{{article_id}}"> 
+        <h1>Download</h1>
+        <p>Your changes have been saved! You may download the results below.</p>
+        <p>If you revisit the workshop page for this article, <strong>the remaining edits made by CopyeditorGPT Turbo 3000 will continue to show up</strong> as changes.</p>
+        <div style="text-align: center;">
+            <button class="btn btn-dark" onclick="window.location.href='/workshop/{{article_id}}/download?type=txt';">Download Plain Text</button>
+            <button class="btn btn-dark" onclick="window.location.href='/workshop/{{article_id}}/download?type=docx';">Download Word Document</button>
+        </div>
+    </div>
+    <div class="article">
+        {% for paragraph in text %}
+        <p>{{paragraph}}</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

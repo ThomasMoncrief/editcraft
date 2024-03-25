@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div class="page-content">
+    <div class="page-title">
+        <h1>Settings for {{user}}</h1>
+    </div>
+    <div class="api-key-display" style="font-size:20px; width:100%;">
+        <div class="api-key-info">
+            <span style="margin-right:1vw;">Your OpenAI API Key:</span>
+            <span id="api-key">{{key}}</span>
+        </div>
+        <div class="api-key-edit">
+            <span style="text-align:right;"><input id="api-edit-button" class="btn btn-dark" type="submit" value="Edit"></span>
+        </div>
+    </div>
+    <form class="api-key-form" action="{% url 'settings' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group" style="padding:20px 0px 20px;">
+            <input id="api-key-input" class="form-control" type="text" name="api-key" placeholder="OpenAI API Key">
+        </div>
+        <div>
+            <input id="api-form-submit" class="btn btn-dark" type="submit" value="Submit">
+            <input id="api-form-cancel" class="btn btn-light" type="button" value="Cancel">
+        </div>
+    </form>
+    <div id="blank-form-alert" class="alert alert-info" role="alert">
+        Please fill in the field.
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static '/js/settings.js' %}"></script>
+{% endblock %}
