@@ -1,6 +1,6 @@
 import docx, json, re
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -90,7 +90,6 @@ def uploader(request):
                 "message": "Log in to begin uploading",
                 "return_to": "uploader"
             })
-    
     if request.method == "POST":
         # clear submit_text in case back button clicked
         submit_text = ""
@@ -136,6 +135,7 @@ def uploader(request):
 
     return render(request, "uploader.html")
 
+
 @csrf_exempt
 def workshop(request):
     #generic workshop view
@@ -173,8 +173,6 @@ def workshop_render(request, id):
     
     # if archive.user == request.user:
     preview_text = compare_text(unedited_text, edited_text)
-
-
     return render(request, "workshop_render.html", {
         "text": preview_text,
         "article_id": id
