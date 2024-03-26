@@ -18,15 +18,11 @@ def run_editor(submit_text, key):
     chunk_count = (len(submit_text) // 4000) + 1 #for updating progress on terminal
     wrapped_text = textwrap.wrap(submit_text, width=4000, replace_whitespace=False, drop_whitespace=False)
     for submit_chunk in wrapped_text:
-        # EDITOR OFF **Uncomment this line, and comment out the lines below "EDITOR ON" to use in testing mode. This will bypass the API call.
-        edited_text += submit_chunk
-
-        # EDITOR ON
-        # try:
-        #     edited_text += assistant.say(submit_chunk)[0].content[0].text.value
-        # #invalid key error
-        # except AuthenticationError:
-        #     return "key invalid"
+        try:
+            edited_text += assistant.say(submit_chunk)[0].content[0].text.value
+        #invalid key error
+        except AuthenticationError:
+            return "key invalid"
 
         #Prints progress to terminal. Need to get something working for client side.
         run_count += 1
