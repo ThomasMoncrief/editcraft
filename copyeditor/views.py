@@ -122,7 +122,7 @@ def uploader(request):
         key = User.objects.get(username=request.user).key
         result = run_editor(submit_text, key)
         
-        # Process the results
+        # Process results
         if result == "key invalid":
             return HttpResponse("Invalid OpenAI key. Make sure to set your key in Settings.")
         if result[0] == "":
