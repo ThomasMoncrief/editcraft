@@ -1,7 +1,7 @@
 # Copy EditorGPT Turbo 3000
 A web app that sends text to OpenAI for copy editing.
 
-<h1>Welcome to Copy EditorGPT Turbo 3000!</h1>
+<h2>Welcome to Copy EditorGPT Turbo 3000!</h2>
 This web app helps you utilize OpenAI's GPT3.5 engine to copy edit your documents. Submit a .txt file with writing of any kind, and the site will return a document that has been edited for spelling, grammar, punctuation, syntax, and other specifications of the Chicago Manual of Style. 
 
 While ChatGPT and the OpenAI API have length limitations for submissions, this web app will handle almost any length behind the scenes, breaking down large documents into chunks of about one thousand words, submitting them in successive API calls, then returning the results in one file. Be mindful that this app breaks documents down by paragraph, so if your document has huge paragraphs (specifically, two successive paragraphs totaling more than about 1500 words), then it may resort in an error. 
