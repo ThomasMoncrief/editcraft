@@ -53,13 +53,10 @@ const rejectRemainingIcon = document.querySelector("#reject-remaining-icon");
 rejectRemainingIcon.addEventListener('click', (rejectRemainingChanges));
 
 document.querySelector("#accept-remaining-icon").addEventListener('click', (acceptRemainingChanges));
-document.querySelector("#save-icon").addEventListener('click', (saveCurrentChanges));
 document.querySelector("#review-icon").addEventListener('click', () => {
     saveCurrentChanges();
-    window.location.href = '/workshop/' + articleId + '/download'
 });
 document.querySelector("#exit-icon").addEventListener('click', () => {
-    saveCurrentChanges();
     window.location.href = '/workshop/'
 });
 
@@ -81,7 +78,7 @@ rejectButton.addEventListener('mouseout', () => {
 acceptButton.addEventListener('mouseover', () => {
     if (selectedDeleteNode) selectedDeleteNode.style.display = "none";
     if (selectedInsertNode) {
-        // Pilcrow character still visible on hover. Could implement something to hide it here and make it reappear on mouseout.
+        // pilcrow character still visible on hover. Could implement something to hide it here and make it reappear on mouseout.
         selectedInsertNode.style.background = "none";
         selectedInsertNode.style.textDecoration = "none";
     } 
@@ -166,6 +163,7 @@ function acceptRemainingChanges() {
 
 function saveCurrentChanges() {
     // reject all remaining changes and remove "ins" nodes. They will re-render after the refresh.
+    console.log("hello")
     rejectRemainingChanges();
     finalText = document.querySelector(".article").innerText;
     

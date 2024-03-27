@@ -101,6 +101,9 @@ tr:hover {
     display: flex;
     align-items: center;
 }
+.icon-wrapper {
+    margin-right:1vw;
+}
 
 #reject-remaining-wrapper:hover {
     filter:hue-rotate(120deg);
