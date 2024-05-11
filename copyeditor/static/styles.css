@@ -105,6 +105,13 @@ tr:hover {
     margin-right:1vw;
 }
 
+.icon-wrapper:hover{
+    .tool-tip {
+        visibility:visible;
+        overflow:visible;
+    }
+}
+
 #reject-remaining-wrapper:hover {
     filter:hue-rotate(120deg);
 }
@@ -122,7 +129,7 @@ tr:hover {
 }
 
 #exit-wrapper:hover {
-    filter:brightness(0);
+    filter:hue-rotate(120deg)
 }
 
 .article {
@@ -143,6 +150,18 @@ tr:hover {
 .workshop-accept-buttons {
     margin-top:25px;
     text-align:center;
+}
+
+.tool-tip {
+    width:fit-content;
+    color:white;
+    padding:3px;
+    border-radius:3px;
+    background:rgb(36, 35, 35);
+    visibility: hidden;
+    position:absolute;
+    top:35px;
+    filter:opacity(85%)
 }
 
 ins {

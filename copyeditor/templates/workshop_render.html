@@ -12,10 +12,18 @@
 <body>
     <div class="workshop-panel">
         <div class="exit-buttons">
-            <span id="reject-remaining-wrapper" class="icon-wrapper" title="Reject all remaining changes"><img id="reject-remaining-icon" class="icon" src="/static/images/reject_remaining_icon.png"></span>
-            <span id="accept-remaining-wrapper" class="icon-wrapper" title="Accept all remaining changes"><img id="accept-remaining-icon" class="icon" src="/static/images/accept_remaining_icon.png"></span>
-            <span id="review-wrapper" class="icon-wrapper" title="Save changes and proceed to review panel"><img id="review-icon" class="icon" src="/static/images/review_icon.png"></span>
-            <span id="exit-wrapper" class="icon-wrapper" title="Exit to Workshop (discards unsaved changes)" onclick="window.location.href='/workshop'"><img id="exit-icon" class="icon" src="/static/images/x_empty.png"></span>
+            <span id="reject-remaining-wrapper" class="icon-wrapper" title="Reject all remaining changes"><img id="reject-remaining-icon" class="icon" src="/static/images/reject_remaining_icon.png">
+                <div class="tool-tip">Reject remaining changes</div>
+            </span>
+            <span id="accept-remaining-wrapper" class="icon-wrapper" title="Accept all remaining changes"><img id="accept-remaining-icon" class="icon" src="/static/images/accept_remaining_icon.png">
+                <div class="tool-tip">Accept remaining changes</div>
+            </span>
+            <span id="review-wrapper" class="icon-wrapper" title="Save changes and proceed to review panel"><img id="review-icon" class="icon" src="/static/images/review_icon.png">
+                <div class="tool-tip">Review</div>
+            </span>
+            <span id="exit-wrapper" class="icon-wrapper" title="Exit to Workshop (discards unsaved changes)" onclick="window.location.href='/workshop'"><img id="exit-icon" class="icon" src="/static/images/x_empty.png">
+                <div class="tool-tip">Exit</div>
+            </span>
         </div>
         <div style="display:inline">
             <div class="workshop-accept-buttons">
