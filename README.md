@@ -2,12 +2,12 @@
 A web app that sends text to OpenAI for copy editing.
 
 <h2>Welcome to Copy EditorGPT Turbo 3000!</h2>
-This web app helps you utilize OpenAI's GPT3.5 engine to copy edit your documents. Submit a .txt file with writing of any kind, and the site will return a document that has been edited for spelling, grammar, punctuation, syntax, and other specifications of the Chicago Manual of Style. 
+This web app helps you utilize OpenAI's GPT3.5 engine to copy edit your documents. Submit a .txt file with writing of any kind, and the site will return a document that has been edited for spelling, grammar, punctuation, syntax, and other specifications of the Chicago Manual of Style.<br> 
 
 While ChatGPT and the OpenAI API have length limitations for submissions, this web app will handle almost any length behind the scenes, breaking down large documents into chunks of about one thousand words, submitting them in successive API calls, then returning the results in one file. Be mindful that this app breaks documents down by paragraph, so if your document has huge paragraphs (specifically, two successive paragraphs totaling more than about 1500 words), then it may resort in an error. 
 
 <h3>How to Install</h3>
-Included in this repository is the single app folder "copyeditor" which can be installed into a standard Django project environment. 
+Included in this repository is the single app folder "copyeditor" which can be installed into a standard Django project environment.<br> 
 
 Remember to alter the Django project's settings.py file:<br>
 `INSTALLED_APPS = ['copyeditor']`<br>
@@ -22,7 +22,7 @@ The requirements.txt includes three required libraries: Diff-match-patch, Python
 <h3>How to Use</h3>
 
 <h4>API key</h4>
-If you don't have an API key, head to <a href="https://platform.openai.com/account/api-keys/" target="_blank">OpenAI's API page</a> and create an account. You will also need to set up a payment method, as the API does cost a negligible amount for usage. Once you obtain an API key, save it in your account settings.
+If you don't have an API key, head to <a href="https://platform.openai.com/account/api-keys/" target="_blank">OpenAI's API page</a> and create an account. You will also need to set up a payment method, as the API does cost a negligible amount for usage. Once you obtain an API key, save it in your account settings.<br>
 
 How much does it cost? The short answer is, very little.<br>
 This app is using the gpt-3.5-turbo-instruct model, which costs $0.0015 per one thousand tokens of usage. Analysis of one thousand words will use about 2,500 tokens. So, editing a full-length article will run you about ten cents. A novel of one hundred thousand words will run you about half the cost of a cup of coffee.
