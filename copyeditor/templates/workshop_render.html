@@ -11,18 +11,22 @@
 
 <body>
     <div class="workshop-panel">
+        <div class="topleft-panel" style="padding-left:25px;">
+            <span class="icon-wrapper">
+                <img id="revert-changes-icon" class="render-icon" src="/static/images/revert_icon.png">
+                <div class="tool-tip">Revert to original edits</div>
+            </span>
+        </div>
+        
         <div class="exit-buttons">
-            <span id="reject-remaining-wrapper" class="icon-wrapper" title="Reject all remaining changes"><img id="reject-remaining-icon" class="icon" src="/static/images/reject_remaining_icon.png">
+            <span id="reject-remaining-wrapper" class="icon-wrapper"><img id="reject-remaining-icon" class="render-icon" src="/static/images/reject_remaining_icon.png">
                 <div class="tool-tip">Reject remaining changes</div>
             </span>
-            <span id="accept-remaining-wrapper" class="icon-wrapper" title="Accept all remaining changes"><img id="accept-remaining-icon" class="icon" src="/static/images/accept_remaining_icon.png">
+            <span id="accept-remaining-wrapper" class="icon-wrapper"><img id="accept-remaining-icon" class="render-icon" src="/static/images/accept_remaining_icon.png">
                 <div class="tool-tip">Accept remaining changes</div>
             </span>
-            <span id="review-wrapper" class="icon-wrapper" title="Save changes and proceed to review panel"><img id="review-icon" class="icon" src="/static/images/review_icon.png">
-                <div class="tool-tip">Review</div>
-            </span>
-            <span id="exit-wrapper" class="icon-wrapper" title="Exit to Workshop (discards unsaved changes)" onclick="window.location.href='/workshop'"><img id="exit-icon" class="icon" src="/static/images/x_empty.png">
-                <div class="tool-tip">Exit</div>
+            <span id="exit-wrapper" class="icon-wrapper"><img id="exit-icon" class="render-icon" src="/static/images/x_empty.png">
+                <div class="tool-tip">Save changes and exit</div>
             </span>
         </div>
         <div style="display:inline">
@@ -30,16 +34,15 @@
                 <button id="reject-button" class="btn btn-danger" style="margin-right:50px;">Reject Selected Change ⛔</button>
                 <button id="accept-button" class="btn btn-success">Accept Selected Change ✓</button>
             </div>
-            <div class="jump-buttons" style="text-align:right; padding-right:50px;">
-                <p>next change -></p>
+            <div class="jump-buttons" style="text-align:right; font-size:20px; margin: 10px 50px;">
+                <button class="btn btn-primary">Next change <img src="/static/images/next_icon.png" style="width:8px;"></button>
             </div>
         </div>
     </div>
 
     <div class="page-content" style="margin-top:100px;">
-        <div class="page-title" article-id="{{article_id}}">  
-            <h1>Workshop</h1>
-        </div>
+        <!-- must have page title so that "article_id is stored in js" -->
+        <div class="page-title" article-id="{{article_id}}"></div>
 
         <div class="article">
             <p>{{text | safe}}</p>

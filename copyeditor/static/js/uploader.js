@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const uploadFile = document.getElementById('upload-file');
     const uploadText = document.getElementById('upload-text');
 
+    // Throw an alert if 'submit' is clicked without content
     document.getElementById('upload-form').addEventListener('submit', function(event) {
-
         if (event.submitter.value === "upload_file") {
             if (uploadFile.files.length === 0) {
                 document.getElementById('blank-upload-alert').style.display = "block";

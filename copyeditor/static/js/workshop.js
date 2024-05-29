@@ -60,9 +60,8 @@ trashIcons.forEach(icon => {
     });
 });
 
-
 function updateTitle(title) {
-    let newTitle = title.querySelector(".title-edit-input").value;
+    let newTitle = title.querySelector(".title-edit-input (deepest").value;
     console.log(newTitle)
     titleToEdit.firstChild.innerText = newTitle;
     titleEditForm.style.display = "none";

@@ -182,6 +182,7 @@ def workshop_render(request, id):
 
 @csrf_exempt
 def workshop_download(request, id):
+
     if not request.user.is_authenticated:
         return render(request, "login.html", {
                 "message": "You must be logged in to view the Workshop.",
@@ -204,34 +205,38 @@ def workshop_download(request, id):
         response['Content-Disposition'] = 'attachment; filename = "edited_text.docx"'
         edited.save(response)
         return response
-    return render(request, "workshop_download.html", {
-        "article_id": id,
-        "text": final_text_string.split("\n")
-    })
+    
+    return HttpResponseRedirect(reverse("workshop"))
 
 
 @csrf_exempt
 # @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def workshop_api(request, id):
+    
     # delete article, sent from workshop.js
     if request.method == "DELETE":
         Archive.objects.get(id=id).delete()
         return HttpResponseRedirect(reverse("workshop"))
+    
+    # sent from workshop_render.js
     elif request.method == "PUT":
         article = Archive.objects.get(id=id)
         data = json.loads(request.body)
         
-        # update title, sent from workshop.js
         if data["request_type"] == "update_title":
             article.title = data["new_title"]
-        # update text, sent from workshop_render.js
+
         elif data["request_type"] == "update_text":
             final_text = data["final_text"].strip()
             final_text = re.sub(r'\r', '', final_text) #eliminate carriage returns submitted through HMTL
             article.final_text = final_text
+
+        elif data["request_type"] == "revert_changes":
+            article.final_text = "" #if no final text exists, original text is used for comparison
+        
         article.save()
         return JsonResponse({'message': 'Article updated successfully!'}, status=200)
-
+        
 
 def about(request):
     return render(request, "about.html")

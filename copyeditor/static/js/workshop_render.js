@@ -48,17 +48,23 @@ acceptButton.addEventListener('click', () => {
 });
 
 
-// reject / accept remaining changes. Save icon is probably not necessary.
-const rejectRemainingIcon = document.querySelector("#reject-remaining-icon");
-rejectRemainingIcon.addEventListener('click', (rejectRemainingChanges));
+//top-left buttons
+document.querySelector("#revert-changes-icon").addEventListener('click', () => {
+    revertChanges().then(() => {
+        window.location.href = '/workshop/' + articleId
+    })
+});
 
+// top-right buttons
+document.querySelector("#reject-remaining-icon").addEventListener('click', (rejectRemainingChanges));
 document.querySelector("#accept-remaining-icon").addEventListener('click', (acceptRemainingChanges));
-document.querySelector("#review-icon").addEventListener('click', () => {
-    saveCurrentChanges();
-});
+
 document.querySelector("#exit-icon").addEventListener('click', () => {
-    window.location.href = '/workshop/'
+    saveCurrentChanges().then(() => {
+        window.location.href = '/workshop/';
+    });
 });
+
 
 // Hover reject
 rejectButton.addEventListener('mouseover', () => {
@@ -133,6 +139,18 @@ function acceptChange() {
     }
 }
 
+function revertChanges() {
+    return fetch('/api/workshop_api/' + articleId, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            request_type: "revert_changes",
+        })
+    })
+}
+
 function rejectRemainingChanges() {
     deletes = document.querySelectorAll("del");
     inserts = document.querySelectorAll("ins")
@@ -163,12 +181,11 @@ function acceptRemainingChanges() {
 
 function saveCurrentChanges() {
     // reject all remaining changes and remove "ins" nodes. They will re-render after the refresh.
-    console.log("hello")
     rejectRemainingChanges();
-    finalText = document.querySelector(".article").innerText;
+    let finalText = document.querySelector(".article").innerText;
     
     // update the final_text in the Archive model
-    fetch('/api/workshop_api/' + articleId, {
+    return fetch('/api/workshop_api/' + articleId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -178,17 +195,6 @@ function saveCurrentChanges() {
             final_text: finalText
         })
     })
-    // redirect to the download page
-    .then(response => {
-        if (response.ok) {
-            window.location.href = '/workshop/' + articleId + '/download';
-        } else {
-            console.error('PUT request failed:', response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
 }
 
 function moveTextIntoSpan(existentNode, nodeContent) {
