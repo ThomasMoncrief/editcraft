@@ -17,7 +17,7 @@ And alter the the project's urls.py file to include the app URLs:<br><br>
 `from django.urls import path, include`<br><br>
 `urlpatterns = [path("", include("copyeditor.urls"))]`
 
-The requirements.txt includes three required libraries: Diff-match-patch, Python-docx, and Marvin. Diff-match-patch, and Python-docx are used to manage text comparison and creating a downloadable Word file, while the Marvin library will manage other dependencies to make API calls to large language models.
+The requirements.txt includes two required libraries: Diff-match-patch and Python-docx. These are used to manage text comparison and creating a downloadable Word file.
 
 <h3>How to Use</h3>
 
@@ -39,8 +39,8 @@ There are a number of updates in the works, and contributions along these lines 
 <h4>Ability to customize prompts and depth of editing</h4>
 Currently, the settings on the API call are fixed, but it would not be difficult to implement a frontend panel which lets the client alter some of the settings. They may want to alter the prompt, style guide to follow, "temperature," or other settings. These will need to be succinctly explained to the user and made easy to alter through a menu.
 
-<h4>Use of OpenAI Assistants</h4>
-Further tuning of prompts and experimentation with other models are necessary to ensure optimization of results. Currently, the Assistant tends to over-edit the prose. This issue could be tackled by using a lower "temperature" or by using more effective prompts.
+<h4>Use of Streaming and other prompt tunings</h4>
+Further tuning of prompts and experimentation with other models are necessary to ensure optimization of results. There is A LOT to explore in this area!
 
 <h3>Thanks for reading!</h3>
 Thank you for reading and please contribute if you are interested in Django, editing with language models, or improving frontend design!

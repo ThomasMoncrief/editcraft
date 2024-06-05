@@ -1,3 +1,2 @@
-marvin==2.3.4
 python-docx==1.1.0
 diff-match-patch==20230430

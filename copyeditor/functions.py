@@ -1,25 +1,35 @@
 import textwrap, re
-import marvin
+from openai import OpenAI
 from openai import AuthenticationError
-from marvin.beta.assistants import Assistant
 from diff_match_patch import diff_match_patch
+
 
 def run_editor(submit_text, key):
     """
     Called in 'uploader' in 'views.py'
     """
-    #create an OpenAI Assistant with marvin
-    assistant = Assistant(instructions="You are a professional copy editor who fixes typos and grammatical mistakes in text. You follow the Chicago Manual of Style for writing numbers, capitalization, headers, and punctuation. You make minimal edits to the voice or style of the prose.", model="gpt-3.5-turbo")
-    marvin.settings.openai.api_key = key
-    marvin.settings.openai.chat.completions.temperature = 0.1
 
     edited_text = ""
     run_count = 0
     chunk_count = (len(submit_text) // 4000) + 1 #for updating progress on terminal
     wrapped_text = textwrap.wrap(submit_text, width=4000, replace_whitespace=False, drop_whitespace=False)
+    
+    #OpenAI API call
+    client = OpenAI()
+    client.api_key = key
+    prompt = "You are a professional copy editor who fixes typos and grammatical mistakes in text. You follow the Chicago Manual of Style for writing numbers, capitalization, headers, and punctuation. You make minimal edits to the voice or style of the prose."
+    
     for submit_chunk in wrapped_text:
         try:
-            edited_text += assistant.say(submit_chunk)[0].content[0].text.value
+            completion = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": prompt},
+                    {"role": "user", "content": submit_chunk}
+                ]
+            )
+            edited_text += str(completion.choices[0].message.content)
+        
         #invalid key error
         except AuthenticationError:
             return "key invalid"
