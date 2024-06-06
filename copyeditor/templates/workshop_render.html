@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="/static/styles.css">
     <link rel="icon" href="/static/images/home_thumbnail.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 
 <body>
     <div class="workshop-panel">
-        <div class="topleft-panel" style="padding-left:25px;">
-            <span class="icon-wrapper">
-                <img id="revert-changes-icon" class="render-icon" src="/static/images/revert_icon.png">
-                <div class="tool-tip">Revert to original edits</div>
-            </span>
-        </div>
+        <!-- <div class="topleft-panel" style="padding-left:25px;"> -->
+            <!-- can insert ".icon-wrapper" divs or spans here -->
+        <!-- </div> -->
         
         <div class="exit-buttons">
+            <span class="icon-wrapper"><img id="revert-changes-icon" class="render-icon" src="/static/images/revert_icon.png">
+                <div class="tool-tip">Revert to original edits</div>
+            </span>
             <span id="reject-remaining-wrapper" class="icon-wrapper"><img id="reject-remaining-icon" class="render-icon" src="/static/images/reject_remaining_icon.png">
                 <div class="tool-tip">Reject remaining changes</div>
             </span>
@@ -40,9 +41,11 @@
         </div>
     </div>
 
-    <div class="page-content" style="margin-top:100px;">
+    <div class="page-content" style="margin-top:150px;">
         <!-- must have page title so that "article_id is stored in js" -->
-        <div class="page-title" article-id="{{article_id}}"></div>
+        <div class="page-title" article-id="{{article_id}}">
+            <h2>{{title}}</h2>
+        </div>
 
         <div class="article">
             <p>{{text | safe}}</p>

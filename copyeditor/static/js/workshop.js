@@ -1,4 +1,4 @@
-console.log("Workshop script loaded")
+
 
 //delete article when trash icon clicked
 const articleTitles = document.querySelectorAll('.workshop-article');
@@ -60,8 +60,8 @@ trashIcons.forEach(icon => {
     });
 });
 
-function updateTitle(title) {
-    let newTitle = title.querySelector(".title-edit-input (deepest").value;
+export function updateTitle(title) {
+    let newTitle = title.querySelector(".title-edit-input").value;
     console.log(newTitle)
     titleToEdit.firstChild.innerText = newTitle;
     titleEditForm.style.display = "none";

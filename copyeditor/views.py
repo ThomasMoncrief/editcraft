@@ -175,7 +175,8 @@ def workshop_render(request, id):
     preview_text = compare_text(unedited_text, edited_text)
     return render(request, "workshop_render.html", {
         "text": preview_text,
-        "article_id": id
+        "article_id": id,
+        "title": archive.title
         })
     # else: **WILL TURN THIS BACK ON WHEN TESTING IS FINISHED 
     # return HttpResponse("You do not have access to that post")

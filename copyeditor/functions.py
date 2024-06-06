@@ -17,7 +17,7 @@ def run_editor(submit_text, key):
     #OpenAI API call
     client = OpenAI()
     client.api_key = key
-    prompt = "You are a professional copy editor who fixes typos and grammatical mistakes in text. You follow the Chicago Manual of Style for writing numbers, capitalization, headers, and punctuation. You make minimal edits to the voice or style of the prose."
+    prompt = "You are a professional copy editor who fixes typos and grammatical mistakes in text. You follow MLA style for all changes. You make minimal edits to the voice or style of the prose."
     
     for submit_chunk in wrapped_text:
         try:
@@ -28,7 +28,7 @@ def run_editor(submit_text, key):
                     {"role": "user", "content": submit_chunk}
                 ]
             )
-            edited_text += str(completion.choices[0].message.content)
+            edited_text += completion.choices[0].message.content
         
         #invalid key error
         except AuthenticationError:

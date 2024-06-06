@@ -11,30 +11,15 @@ changes.forEach(thisNode => {
     let replacementHTML = thisNode.innerHTML.replace(/<br>/g, '<br>¶');
     thisNode.innerHTML = replacementHTML;
     
-    // add selection event to all delete and insert nodes
     thisNode.addEventListener('click', () => {
         selectNode(thisNode);
     });
 });
     
-// jump to next change
-document.querySelector(".jump-buttons").addEventListener('click', () => {
-    let change = null;
-    let highlighted = document.querySelector(".del-selected, .ins-selected");
+let highlighted = null;
 
-    // find next change beginning from current selection
-    if (highlighted) {
-        change = highlighted.nextElementSibling;
-        while (change && change.nodeName !== "DEL" && change.nodeName !== "INS") {
-            change = change.nextElementSibling;
-        }
-    // find next change from top of the DOM if no current selection
-    } else {
-        change = document.querySelector("del, ins");
-    }
-    selectNode(change);
-    change.scrollIntoView({block: "center", inline: "nearest"});
-});
+// jump to next change
+document.querySelector(".jump-buttons").addEventListener('click', jumpToNextChange);
 
 // universal reject and accept buttons
 const rejectButton = document.getElementById('reject-button');
@@ -124,6 +109,11 @@ function selectNode(thisNode) {
 }
 
 function rejectChange() {
+    //This is not working as intended, but some implementation is needed.
+    //We need to jump to the next change before the highlighted text is removed. Otherwise the "next change"
+    //button will begin from the top. Make sure to implement in `acceptChange()` also.
+    // jumpToNextChange();
+    
     if (selectedInsertNode) selectedInsertNode.remove();
     if (selectedDeleteNode) {
         moveTextIntoSpan(selectedDeleteNode, selectedDeleteNode.innerHTML); 
@@ -132,6 +122,7 @@ function rejectChange() {
 }
 
 function acceptChange() {
+    // jumpToNextChange();
     if (selectedDeleteNode) selectedDeleteNode.remove();
     if (selectedInsertNode) {
         moveTextIntoSpan(selectedInsertNode, selectedInsertNode.innerHTML);
@@ -201,4 +192,23 @@ function moveTextIntoSpan(existentNode, nodeContent) {
     const newNode = document.createElement("span");
     newNode.innerHTML = nodeContent.replace(/¶/g, ""); //eliminate ¶ characters while moving HTML
     existentNode.before(newNode);
+}
+
+function jumpToNextChange() {
+    
+    let change = null;
+    highlighted = document.querySelector(".del-selected, .ins-selected");
+
+    // find next change beginning from current selection
+    if (highlighted) {
+        change = highlighted.nextElementSibling;
+        while (change && change.nodeName !== "DEL" && change.nodeName !== "INS") {
+            change = change.nextElementSibling;
+        }
+    // find next change from top of the DOM if no current selection
+    } else {
+        change = document.querySelector("del, ins");
+    }
+    selectNode(change);
+    change.scrollIntoView({block: "center", inline: "nearest"});
 }
