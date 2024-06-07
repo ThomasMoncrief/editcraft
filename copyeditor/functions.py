@@ -9,34 +9,29 @@ def run_editor(submit_text, key):
     Called in 'uploader' in 'views.py'
     """
 
-    edited_text = ""
-    run_count = 0
-    chunk_count = (len(submit_text) // 4000) + 1 #for updating progress on terminal
-    wrapped_text = textwrap.wrap(submit_text, width=4000, replace_whitespace=False, drop_whitespace=False)
-    
     #OpenAI API call
     client = OpenAI()
     client.api_key = key
-    prompt = "You are a professional copy editor who fixes typos and grammatical mistakes in text. You follow MLA style for all changes. You make minimal edits to the voice or style of the prose."
-    
-    for submit_chunk in wrapped_text:
-        try:
-            completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": prompt},
-                    {"role": "user", "content": submit_chunk}
-                ]
-            )
-            edited_text += completion.choices[0].message.content
-        
-        #invalid key error
-        except AuthenticationError:
-            return "key invalid"
+    prompt = "You are a professional copy editor who fixes typos and grammatical mistakes in text. You follow MLA style for making corrections. You make MINIMAL edits to the voice or style of the prose, only correcting when there are obvious errors."
+    edited_text = ""
+    try:
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": submit_text}
+            ],
+            stream=True
+        )
 
-        #Prints progress to terminal. Need to get something working for client side.
-        run_count += 1
-        print("Finished {:.0%}".format(run_count / chunk_count))
+        for chunk in completion:
+            if chunk.choices[0].delta.content is not None:
+                print(chunk.choices[0].delta.content, end="")
+                edited_text += chunk.choices[0].delta.content
+        #invalid key error
+    except AuthenticationError:
+        return "key invalid"
+
     return edited_text
 
 
