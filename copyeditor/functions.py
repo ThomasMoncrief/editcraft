@@ -58,10 +58,26 @@ def compare_text(original_text, edited_text):
     dmp.Diff_Timeout = 0
     diffs = dmp.diff_main(original_text, edited_text)
     dmp.diff_cleanupSemantic(diffs)
-    
-    html_preview = dmp.diff_prettyHtml(diffs)
-    
-    #clean out blank <ins> tags which diff_prettyHtml creates
-    pattern = re.compile(r'<ins>\s*</ins>')
-    html_preview = re.sub(pattern, '', html_preview)
-    return html_preview
+
+    # This is the dmp.diff_prettyHtml method with added lines (commented below) so that we can
+    # separate inserted or deleted <br> tags ("\n" characters) into their own HTML elements.
+    html = []
+    for op, data in diffs:
+        text = (
+            data.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace("\n", "<br>")
+        )
+        if op == dmp.DIFF_INSERT:
+            if text != "<br>": 
+                text = re.sub(r'<br>', r'</ins><ins><br></ins><ins>', text) #added for this project
+            html.append('<ins>%s</ins>' % text)
+        elif op == dmp.DIFF_DELETE:
+            if text != "<br>": 
+                text = re.sub(r'<br>', r'</del><del><br></del><del>', text) #added for this project
+            html.append('<del>%s</del>' % text)
+        elif op == dmp.DIFF_EQUAL:
+            html.append("<span>%s</span>" % text)
+
+    return "".join(html)
