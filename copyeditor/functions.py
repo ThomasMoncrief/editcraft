@@ -2,7 +2,7 @@ import textwrap, re
 from openai import OpenAI
 from openai import AuthenticationError
 from diff_match_patch import diff_match_patch
-
+from json import dumps, loads
 
 def run_editor(submit_text, key):
     """
@@ -51,7 +51,8 @@ def get_title(text):
 
 def compare_text(original_text, edited_text):
     """
-    Called in 'workshop_render'. Builds a set of text to show the user on the HTML page.
+    Use diff-match-patch to return a string of diffs data.
+    Later, json.loads() is used to render the diffs into a list.
     """
 
     dmp = diff_match_patch()
@@ -59,9 +60,22 @@ def compare_text(original_text, edited_text):
     diffs = dmp.diff_main(original_text, edited_text)
     dmp.diff_cleanupSemantic(diffs)
 
+    # make the list of diffs a string so SQLite can store it
+    diffs = dumps(diffs)
+    return diffs
+
+    
+def create_html(diffs):
+    """
+    Called in 'workshop_render'. Builds the HTML page from the diffs and original text.
+    """
+    # "unpack" the diff data back into a list
+    diffs = loads(diffs)
+    dmp = diff_match_patch()
+    html = []
+    
     # This is the dmp.diff_prettyHtml method with added lines (commented below) so that we can
     # separate inserted or deleted <br> tags ("\n" characters) into their own HTML elements.
-    html = []
     for op, data in diffs:
         text = (
             data.replace("&", "&amp;")

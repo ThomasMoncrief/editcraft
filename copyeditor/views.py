@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from copyeditor.functions import run_editor, get_title, compare_text
+from copyeditor.functions import run_editor, get_title, compare_text, create_html
 # from django.views.decorators.cache import cache_control
 
 from .models import User, Archive
@@ -128,7 +128,8 @@ def uploader(request):
         if result[0] == "":
             result = result[1:] #eliminate first line if it is blank
         title = get_title(result)
-        save_in_archive = Archive(user=request.user, title=title, original_text=submit_text, edited_text=result)
+        diffs = compare_text(submit_text, result)
+        save_in_archive = Archive(user=request.user, title=title, original_text=submit_text, edited_text=result, diffs=diffs)
         save_in_archive.save()
 
         return HttpResponseRedirect(f"workshop/{save_in_archive.id}")
@@ -171,8 +172,11 @@ def workshop_render(request, id):
     
     unedited_text = re.sub(r'\r', '', unedited_text)
     
+    #**
+    diffs = archive.diffs
+
     # if archive.user == request.user:
-    preview_text = compare_text(unedited_text, edited_text)
+    preview_text = create_html(diffs)
     return render(request, "workshop_render.html", {
         "text": preview_text,
         "article_id": id,
@@ -231,6 +235,7 @@ def workshop_api(request, id):
             final_text = data["final_text"].strip()
             final_text = re.sub(r'\r', '', final_text) #eliminate carriage returns submitted through HMTL
             article.final_text = final_text
+            article.diffs = compare_text(final_text, article.edited_text)
 
         elif data["request_type"] == "revert_changes":
             article.final_text = "" #if no final text exists, original text is used for comparison
