@@ -10,7 +10,7 @@ class Archive(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, default="Untitled")
     submit_time = models.DateTimeField(default=datetime.now)
-    edited_text = models.TextField()
     original_text = models.TextField(default="")
+    edited_text = models.TextField()
     final_text = models.TextField(default="", blank=True)
     diffs = models.TextField(default="")
