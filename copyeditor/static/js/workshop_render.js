@@ -195,7 +195,6 @@ function moveTextIntoSpan(existentNode, nodeContent) {
 }
 
 function jumpToNextChange() {
-    
     let change = null;
     highlighted = document.querySelector(".del-selected, .ins-selected");
 

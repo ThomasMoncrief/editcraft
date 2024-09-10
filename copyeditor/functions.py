@@ -1,4 +1,4 @@
-import textwrap, re
+import re
 from openai import OpenAI
 from openai import AuthenticationError
 from diff_match_patch import diff_match_patch
